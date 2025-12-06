@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header text-white" style="background-color: orange;">
+            <h4 class="mb-0"><i class="fas fa-calendar-plus me-2"></i> Time Table - <span class="badge bg-light text-dark">{{day_selected}}</span></h4>
+        </div>
+        
+        <div class="card-body">
+            <form method="get" class="row g-3 align-items-center mb-4">
+                <div class="col-auto">
+                    <label for="daySelect" class="col-form-label fw-semibold"><i class="fas fa-calendar-day me-1"></i>Select Day:</label>
+                </div>
+                <div class="col-auto">
+                    <select class="form-select" id="daySelect" name="day" onchange="this.form.submit()">
+                        {% for day in days %}
+                            <option value="{{ day }}" {% if day == day_selected %}selected{% endif %}>{{ day }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th><i class="fas fa-clock me-1"></i>Start Time</th>
+                            <th><i class="fas fa-hourglass-end me-1"></i>End Time</th>
+                            <th><i class="fas fa-book me-1"></i>Subject</th>
+                            <th><i class="fas fa-user-tie me-1"></i>Teacher</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in timetable %}
+                        <tr>
+                            <td><span class="text-success fw-bold">{{ row.start_time|time:"g:i A" }}</span></td>
+                            <td><span class="text-danger fw-bold">{{ row.end_time|time:"g:i A" }}</span></td>
+                            <td><span class="badge bg-info text-dark">{{ row.subject.subject_name }}</span></td>
+                            <td>{{ row.staff.admin.first_name }} {{ row.staff.admin.last_name }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-4">
+                                <i class="fas fa-info-circle me-2"></i>No classes scheduled for <strong>{{ day_selected }}</strong>.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

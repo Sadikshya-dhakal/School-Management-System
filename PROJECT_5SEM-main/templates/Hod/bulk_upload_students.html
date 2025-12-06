@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container mt-5">
+  <h3 class="mb-4">Upload Students (CSV / Excel)</h3>
+  {% include 'includes/messages.html' %}
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <form method="post" enctype="multipart/form-data" action="{% url 'bulk_upload_students' %}">
+        {% csrf_token %}
+        <input type="hidden" name="preview" value="1">
+        <div class="d-flex gap-3 align-items-center">
+          <div class="flex-grow-1">
+            <label class="form-label">Choose file (.csv, .xlsx)</label>
+            <input type="file" name="file" accept=".csv,.xlsx" class="form-control" required>
+          </div>
+          <div>
+            <button class="btn btn-primary mt-4">Upload & Preview</button>
+          </div>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+
+  {% if preview_rows %}
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="mb-3">Preview Uploaded Data</h5>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead class="table-light">
+              <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Course</th>
+                <th>Session</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in preview_rows %}
+                <tr class="{% if row.error %}table-danger{% endif %}">
+                  <td>{{ forloop.counter }}</td>
+                  <td>{{ row.first_name }}</td>
+                  <td>{{ row.last_name }}</td>
+                  <td>{{ row.email }}</td>
+                  <td>{{ row.username }}</td>
+                  <td>{{ row.password }}</td>
+                  <td>{{ row.course_display }}</td>
+                  <td>{{ row.session_display }}</td>
+                  <td>{{ row.address }}</td>
+                  <td>{{ row.phone_number }}</td>
+                  <td>
+                    {% if row.error %}
+                      <small>{{ row.error }}</small>
+                    {% else %}
+                      <span class="text-success">OK</span>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <form method="post" action="{% url 'bulk_upload_confirm' %}">
+          {% csrf_token %}
+          <button class="btn btn-success" {% if preview_rows|length == 0 %}disabled{% endif %}>
+            Confirm & Import
+          </button>
+        </form>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

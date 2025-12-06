@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'includes/messages.html' %}
+
+<h4>Add New Leave Type</h4>
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Enter Leave Type" required class="form-control w-25 d-inline-block mr-2">
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+
+<hr>
+<h5>All Leave Types</h5>
+<table class="table table-bordered w-50">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for lt in leave_types %}
+        <tr>
+            <td>{{ lt.name }}</td>
+            <td><a href="{% url 'delete_leave_type' lt.id %}" class="btn btn-danger btn-sm">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,373 @@
+{% load static %}
+
+
+<div class="header">
+    {% if user.user_type == '1' %}
+            <div class="header-left">
+               <a href="" class="logo">
+               <img src="{% static 'assets/img/edusphere_logo.png' %}" alt="Logo" width="80" height="80">
+               </a>
+               <a href="index.html" class="logo logo-small">
+               <img src="{% static 'assets/img/logo1.png'%}" alt="EduSphere Logo" width="80" height="80">
+               </a>
+            </div>
+            <a href="javascript:void(0);" id="toggle_btn">
+            <i class="fas fa-align-left"></i>
+            </a>
+            <div class="top-nav-search mt-3" >
+               <h4><strong>Welcome</strong>&nbsp;<span>{{user.first_name}} {{user.last_name}}</span></h4>
+            </div>
+            <a class="mobile_btn" id="mobile_btn">
+            <i class="fas fa-bars"></i>
+            </a>
+            <ul class="nav user-menu">
+               <li class="nav-item dropdown noti-dropdown">
+                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    
+                  <i class="far fa-bell"></i> <span class="badge badge-pill">3</span>
+                  </a>
+                  <div class="dropdown-menu notifications">
+                     <div class="topnav-dropdown-header">
+                        <span class="notification-title">Notifications</span>
+                        <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                     </div>
+                     <div class="noti-content">
+                        <ul class="notification-list">
+                           <li class="notification-message">
+                              <a href="#">
+                                 <div class="media">
+                                    <span class="avatar avatar-sm">
+                                    <img class="avatar-img rounded-circle" alt="User Image" src="{{ user.profile.profile_pic.url }}">
+                                    </span>
+                                    <div class="media-body">
+                                       <p class="noti-details"><span class="noti-title">Carlson Tech</span> has approved <span class="noti-title">your estimate</span></p>
+                                       <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li class="notification-message">
+                              <a href="#">
+                                 <div class="media">
+                                    <span class="avatar avatar-sm">
+                                    <img class="avatar-img rounded-circle" alt="User Image" src="{% static 'assets/img/profiles/avatar-11.jpg'%}">
+                                    </span>
+                                    <div class="media-body">
+                                       <p class="noti-details"><span class="noti-title">International Software Inc</span> has sent you a invoice in the amount of <span class="noti-title">$218</span></p>
+                                       <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li class="notification-message">
+                              <a href="#">
+                                 <div class="media">
+                                    <span class="avatar avatar-sm">
+                                    <img class="avatar-img rounded-circle" alt="User Image" src="{% static 'assets/img/profiles/avatar-17.jpg'%}">
+                                    </span>
+                                    <div class="media-body">
+                                       <p class="noti-details"><span class="noti-title">John Hendry</span> sent a cancellation request <span class="noti-title">Apple iPhone XR</span></p>
+                                       <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                           <li class="notification-message">
+                              <a href="#">
+                                 <div class="media">
+                                    <span class="avatar avatar-sm">
+                                    <img class="avatar-img rounded-circle" alt="User Image" src="{% static 'assets/img/profiles/avatar-13.jpg'%}">
+                                    </span>
+                                    <div class="media-body">
+                                       <p class="noti-details"><span class="noti-title">Mercury Software Inc</span> added a new product <span class="noti-title">Apple MacBook Pro</span></p>
+                                       <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
+                                    </div>
+                                 </div>
+                              </a>
+                           </li>
+                        </ul>
+                     </div>
+                     <div class="topnav-dropdown-footer">
+                        <a href="#">View all Notifications</a>
+                     </div>
+                  </div>
+               </li>
+               <li class="nav-item dropdown has-arrow">
+                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <span class="user-img">
+                     {% if user.profile_pic and user.profile_pic.url %}
+                        <span class="user-img">
+                           <img class="rounded-circle" src="{{ user.profile_pic.url }}" width="30" alt="Profile">
+                           <span class="status online"></span>
+                        </span>
+                     {% else %}
+                        <span class="user-img">
+                           <img class="rounded-circle" src="{% static 'assets/img/noimg.png' %}" width="30" alt="Profile">
+                           <span class="status online"></span>
+                        </span>
+                     {% endif %}
+                                 </span>
+                  </a>
+                  <div class="dropdown-menu">
+                     <div class="user-header">
+                        <div class="avatar avatar-sm">
+                           {% if user.profile_pic and user.profile_pic.url %}
+                              <img src="{{ user.profile_pic.url }}" alt="User Image" class="avatar-img rounded-circle">
+                           {% else %}
+                              <img src="{% static 'assets/img/noimg.png' %}" alt="User Image" class="avatar-img rounded-circle">
+                           {% endif %}
+                        </div>
+                        <div class="user-text">
+                           <h6>{{user.first_name}}&nbsp; {{user.last_name}}</h6>
+                           {% if user.user_type == '1' %}
+                           <p class="text-muted mb-0">HOD</p>
+                           {%elif user.user_type == '2' %}
+                           <p class="text-muted mb-0">Staff</p>
+                           {%else%}
+                           <p class="text-muted mb-0">Student</p>
+                           {%endif%}
+                        </div>
+                     </div>
+                     <a class="dropdown-item" href="#">My Profile</a>
+                     <a class="dropdown-item" href="inbox.html">Inbox</a>
+                     <a class="dropdown-item" href={% url 'logout' %}>Logout</a>
+                  </div>
+               </li>
+            </ul>
+         
+         {% elif user.user_type == '2' %}
+         <div class="header-left">
+               <a href="" class="logo">
+               <img src="{% static 'assets/img/logo1.png'%}" alt="Logo" width="80" height="80">
+               </a>
+               <a href="index.html" class="logo logo-small">
+               <img src="{% static 'assets/img/logo1.png'%}" alt="Logo" width="80" height="80">
+               </a>
+               </a>
+            </div>
+            <a href="javascript:void(0);" id="toggle_btn">
+            <i class="fas fa-align-left"></i>
+            </a>
+            <div class="top-nav-search mt-3" >
+               <h4><strong>Welcome</strong>&nbsp;<span>{{user.first_name}} {{user.last_name}}</span></h4>
+            </div>
+            <a class="mobile_btn" id="mobile_btn">
+            <i class="fas fa-bars"></i>
+            </a>
+            <ul class="nav user-menu">
+               <li class="nav-item dropdown noti-dropdown">
+                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    
+                  <i class="far fa-bell"></i> <span class="badge badge-pill">3</span>
+                  </a>
+                  <div class="dropdown-menu notifications">
+                  <div class="topnav-dropdown-header">
+                     <span class="notification-title">Notifications</span>
+                     <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                  </div>
+                  <div class="noti-content">
+                     <ul class="notification-list">
+                           {% if notification_obj %}
+                              {% for notif in notification_obj|slice:":5" %}  <!-- Show latest 5 -->
+                              <li class="notification-message">
+                                 <a href="#">
+                                       <div class="media">
+                                          <span class="avatar avatar-sm">
+                                             {% if notif.sender.user_type == '1' and notif.sender.profile_pic and notif.sender.profile_pic.url %}
+                                                <img class="avatar-img rounded-circle" alt="HOD Image" src="{{ notif.sender.profile_pic.url }}">
+                                             {% else %}
+                                                <img class="avatar-img rounded-circle" alt="Default" src="{% static 'assets/img/noimg.png' %}">
+                                             {% endif %}
+                                          </span>
+                                          <div class="media-body">
+                                             <p class="noti-details">
+                                                   <span class="noti-title">New Notification</span>: {{ notif.message|truncatechars:40 }}
+                                             </p>
+                                             <p class="noti-time">
+                                                   <span class="notification-time">{{ notif.created_at|date:"M d, Y" }}</span>
+                                             </p>
+                                          </div>
+                                       </div>
+                                 </a>
+                              </li>
+                              {% endfor %}
+                           {% else %}
+                              <li class="notification-message text-center text-muted">
+                                 No new notifications
+                              </li>
+                           {% endif %}
+                     </ul>
+                  </div>
+                  <div class="topnav-dropdown-footer">
+                     <a href="{% url 'staff_notification' %}">View all Notifications</a>
+                  </div>
+               </div>
+
+               </li>
+               <li class="nav-item dropdown has-arrow">
+                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <span class="user-img">
+                     {% if user.profile_pic and user.profile_pic.url %}
+                        <span class="user-img">
+                           <img class="rounded-circle" src="{{ user.profile_pic.url }}" width="30" alt="Profile">
+                           <span class="status online"></span>
+                        </span>
+                     {% else %}
+                        <span class="user-img">
+                           <img class="rounded-circle" src="{% static 'assets/img/noimg.png' %}" width="30" alt="Profile">
+                           <span class="status online"></span>
+                        </span>
+                     {% endif %}
+                                 </span>
+                  </a>
+                  <div class="dropdown-menu">
+                     <div class="user-header">
+                        <div class="avatar avatar-sm">
+                           {% if user.profile_pic and user.profile_pic.url %}
+                              <img src="{{ user.profile_pic.url }}" alt="User Image" class="avatar-img rounded-circle">
+                           {% else %}
+                              <img src="{% static 'assets/img/noimg.png' %}" alt="User Image" class="avatar-img rounded-circle">
+                           {% endif %}
+                        </div>
+                        <div class="user-text">
+                           <h6>{{user.first_name}}&nbsp; {{user.last_name}}</h6>
+                           {% if user.user_type == '1' %}
+                           <p class="text-muted mb-0">HOD</p>
+                           {%elif user.user_type == '2' %}
+                           <p class="text-muted mb-0">Staff</p>
+                           {%else%}
+                           <p class="text-muted mb-0">Student</p>
+                           {%endif%}
+                        </div>
+                     </div>
+                     <a class="dropdown-item" href="#">My Profile</a>
+                     <a class="dropdown-item" href="inbox.html">Inbox</a>
+                     <a class="dropdown-item" href={% url 'logout' %}>Logout</a>
+                  </div>
+               </li>
+            </ul>
+         
+         {%else%}
+         <div class="header-left">
+              <a href="" class="logo">
+               <img src="{% static 'assets/img/logo1.png'%}" alt="Logo" width="80" height="80">
+               </a>
+               <a href="index.html" class="logo logo-small">
+               <img src="{% static 'assets/img/logo1.png'%}" alt="Logo" width="80" height="80">
+               </a>
+            </div>
+            <a href="javascript:void(0);" id="toggle_btn">
+            <i class="fas fa-align-left"></i>
+            </a>
+            <div class="top-nav-search mt-3" >
+               <h4><strong>Welcome</strong>&nbsp;<span>{{user.first_name}} {{user.last_name}}</span></h4>
+            </div>
+            <a class="mobile_btn" id="mobile_btn">
+            <i class="fas fa-bars"></i>
+            </a>
+            <ul class="nav user-menu">
+               <li class="nav-item dropdown noti-dropdown">
+                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    
+                  <i class="far fa-bell"></i> <span class="badge badge-pill">3</span>
+                  </a>
+                 <div class="dropdown-menu notifications">
+                     <div class="topnav-dropdown-header">
+                        <span class="notification-title">Notifications</span>
+                        <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                     </div>
+
+                     <div class="noti-content">
+                        <ul class="notification-list">
+                              {% if notification_obj %}
+                                 {% for notif in notification_obj|slice:":4" %}
+                                    <li class="notification-message">
+                                          <a href="#">
+                                             <div class="media">
+                                                <span class="avatar avatar-sm">
+                                                   {% if user.profile_pic and user.profile_pic.url %}
+                                                      <img class="avatar-img rounded-circle" alt="User Image" src="{{ user.profile_pic.url }}">
+                                                   {% else %}
+                                                      <img class="avatar-img rounded-circle" alt="User Image" src="{% static 'assets/img/noimg.png' %}">
+                                                   {% endif %}
+                                                </span>
+                                                <div class="media-body">
+                                                      <p class="noti-details">
+                                                         <span class="noti-title">Notice:</span> {{ notif.message|truncatewords:8 }}
+                                                      </p>
+                                                      <p class="noti-time">
+                                                         <span class="notification-time">{{ notif.created_at|date:"M d, Y" }}</span>
+                                                      </p>
+                                                </div>
+                                             </div>
+                                          </a>
+                                    </li>
+                                 {% endfor %}
+                              {% else %}
+                                 <li class="notification-message">
+                                    <div class="media-body p-2 text-center">
+                                          <p class="noti-details text-muted">No notifications available.</p>
+                                    </div>
+                                 </li>
+                              {% endif %}
+                        </ul>
+                     </div>
+
+                     <div class="topnav-dropdown-footer">
+                        <a href="{% url 'student_home' %}">View all Notifications</a>
+                     </div>
+                  </div>
+
+               </li>
+               <li class="nav-item dropdown has-arrow">
+                  <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                    <span class="user-img">
+                     {% if user.profile_pic and user.profile_pic.url %}
+                        <span class="user-img">
+                           <img class="rounded-circle" src="{{ user.profile_pic.url }}" width="30" alt="Profile">
+                           <span class="status online"></span>
+                        </span>
+                     {% else %}
+                        <span class="user-img">
+                           <img class="rounded-circle" src="{% static 'assets/img/noimg.png' %}" width="30" alt="Profile">
+                           <span class="status online"></span>
+                        </span>
+                     {% endif %}
+                                 </span>
+                  </a>
+                  <div class="dropdown-menu">
+                     <div class="user-header">
+                        <div class="avatar avatar-sm">
+                           {% if user.profile_pic and user.profile_pic.url %}
+                              <img src="{{ user.profile_pic.url }}" alt="User Image" class="avatar-img rounded-circle">
+                           {% else %}
+                              <img src="{% static 'assets/img/noimg.png' %}" alt="User Image" class="avatar-img rounded-circle">
+                           {% endif %}
+                        </div>
+                        <div class="user-text">
+                           <h6>{{user.first_name}}&nbsp; {{user.last_name}}</h6>
+                           {% if user.user_type == '1' %}
+                           <p class="text-muted mb-0">HOD</p>
+                           {%elif user.user_type == '2' %}
+                           <p class="text-muted mb-0">Staff</p>
+                           {%else%}
+                           <p class="text-muted mb-0">Student</p>
+                           {%endif%}
+                        </div>
+                     </div>
+                     <a class="dropdown-item" href="#">My Profile</a>
+                     <a class="dropdown-item" href="inbox.html">Inbox</a>
+                     <a class="dropdown-item" href={% url 'logout' %}>Logout</a>
+                  </div>
+               </li>
+            </ul>
+         
+         {% endif %}
+</div>
+
+         
+
+
+
+
+   

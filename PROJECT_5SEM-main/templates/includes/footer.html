@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- meta tags, title, CSS, etc. -->
+</head>
+<body style="margin: 0; min-height: 100vh; display: flex; flex-direction: column;">
+
+  <!-- Navbar or Header here -->
+
+  <main style="flex: 1;">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <!-- Your custom footer -->
+  <footer style="
+    background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+    color: #e0e0e0;
+    padding: 32px 0 20px 0;
+    text-align: center;
+    font-family: 'Segoe UI', Roboto, monospace;
+    border-top: 1px solid #444;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.5);
+  ">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <p style="font-size: 1.15rem; margin-bottom: 10px; letter-spacing: 0.7px; font-weight: 500;">
+        <i class="fas fa-graduation-cap" style="color: #ffa500; margin-right: 8px;"></i>
+        Empowering Education, Inspiring Futures
+      </p>
+
+      <div style="margin: 16px 0;">
+        <a href="https://www.facebook.com" target="_blank" style="color: #e0e0e0; margin: 0 10px; font-size: 1.4rem;">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.twitter.com" target="_blank" style="color: #e0e0e0; margin: 0 10px; font-size: 1.4rem;">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com" target="_blank" style="color: #e0e0e0; margin: 0 10px; font-size: 1.4rem;">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="mailto:info@school.edu" style="color: #e0e0e0; margin: 0 10px; font-size: 1.4rem;">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+
+      <p style="font-size: 0.95rem; color: #b0bec5; margin-top: 12px;">
+        &copy; 2025 <strong>School Management System</strong>. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</body>
+</html>

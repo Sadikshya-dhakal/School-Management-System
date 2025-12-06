@@ -1,0 +1,114 @@
+{% extends 'base.html'%}
+{% block content%}
+<div class="content container-fluid">
+
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col">
+    
+            <h3 class="page-title">Apply for leave</h3>
+            <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
+             Leave Apply History
+            </button>
+ 
+            </div>   
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                {%include 'includes/messages.html' %}
+             <form method="POST" action="{% url 'student_leave_save' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12">
+                    <h5 class="form-title"><span>Leave Information</span></h5>
+                 </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Leave Start Date</label>
+                                <input type="date" class="form-control" name="leave_start_date" required>
+                            </div>
+                        </div>
+                <div class="col-12 col-sm-6">
+                <div class="form-group">
+                <label>Leave End Date</label>
+                <input type="date" class="form-control" name="leave_end_date" required>
+                </div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                <div class="form-group">
+                <label>Reason</label>
+                <textarea class="form-control" name="reason" rows="4" placeholder ="Leave your reason here ! " required></textarea>
+                </div>
+                </div>
+
+                <div class="col-12">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+             </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Large modal -->
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Leave Apply History</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">
+            <table id="studentTable" class="table table-striped table-bordered" style="width: 100%; background: #fff;">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Leave Start Date</th>
+                    <th>Leave End Date</th>
+                    <th>Reason</th>
+                    <th>Satus</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in student_leave_obj %}
+                <tr>
+                    
+                    <td>{{ i.leave_start_date}}</td>
+                    <td>{{ i.leave_end_date }}</td>
+                    <td>{{ i.leave_message }}</td>
+                
+                    
+                    <td>
+                        {% if i.leave_status == 0%}
+                        <span class ="badge badge-danger">Pending</span>
+                        {% elif i.leave_status == 1%}
+                        <span class ="badge badge-success">Approved</span>
+                        {% else %}
+                        <span class ="badge badge-danger">Disapproved</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

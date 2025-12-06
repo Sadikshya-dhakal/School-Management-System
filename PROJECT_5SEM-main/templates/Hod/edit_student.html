@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Update Student</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 600px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      margin: auto;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    input[type="email"]:disabled {
+      background-color: #e9ecef;
+      color: #666;
+    }
+    input[type="text"]#address {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    select#gender {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      background-color: #fff;
+    }
+
+    select#course {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        background-color: #fff;
+      }
+
+      select#session_year {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        background-color: #fff;
+      }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Edit Student</h2>
+    {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+               <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+               <div>
+                 {{message}}
+               </div>
+             </div>
+             {% endif %}
+             {% endfor %}
+             {% endif %}
+
+     {% if messages %}
+             {% for message in messages %}
+             {% if message.tags == 'success' %}
+             <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                  {{message}}
+                </div>
+              </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+    <form method="POST" action="{% url 'update_student' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+      <label for="profile_pic">Profile Pic</label>
+      <input type="file" id="profile-pic" name="profile_pic">
+      <input type="text" name="student_id" value="{{student.id}}" hidden>
+      <label for="first-name">First Name</label>
+      <input type="text" id="first_name" name="first_name" value ="{{student.admin.first_name}}">
+
+      <label for="last-name">Last Name</label>
+      <input type="text" id="last_name" name="last_name" value ="{{student.admin.last_name}}">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" value="{{student.admin.email}}">
+
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" value="{{student.admin.username}}" >
+
+      <label for="password">Password</label>
+      <input type="text" id="password" name="password" placeholder="Leave blank to keep current password" >
+      
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" value="{{student.address}}" >
+
+      <label for="phone_number">Phone Number</label>
+      <input type="text" id="phone_number" name="phone_number" value="{{student.phone_number}}" >
+
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender"  >
+            <option disabled>Select Gender </option>
+            <option value="Male" {% if student.gender == "Male" %}selected{% endif %}>Male</option>
+            <option value="Female" {% if student.gender == "Female" %}selected{% endif %}>Female</option>
+            <option value="Others" {% if student.gender == "Others" %}selected{% endif %}>Others</option>
+        </select>
+
+        <label for="course">Course</label>
+        <select id="course" name="course" value="{{student.course_id.id}}"  >
+            <option disabled>Select Course</option>
+            {% for i in courses %}
+                <option value="{{ i.id }}" {% if i.id == student.course_id.id %}selected{% endif %}>{{ i.course_name }}</option>
+            {% endfor %}
+            
+        </select>
+        
+
+        <label for="session_year">Session Year</label>
+        <select id="session_year" name="session_year"  >
+            <option disabled selected>Select Session Year</option>
+            {% for session in session_years %}
+                <option value="{{ session.id }}" {% if session.id == student.session_year_id.id %}selected{% endif %}>
+                    {{ session.session_start_year }} - {{ session.session_end_year }}
+                </option>
+            {% endfor %}
+            
+        </select>
+    <button type="submit" style="margin-top: 20px; padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      Update Student
+    </button>
+    </form>
+  </div>
+
+</body>
+</html>
+
+
+{%endblock%}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<head>
+<style>
+    select#course {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        background-color: #fff;
+      }
+      select#staff {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        background-color: #fff;
+      }
+    </style>
+</head>
+<div class="container">
+    <h2>Add Subject</h2>
+    {% include 'includes/messages.html' %}
+    <form method="POST" action="{% url 'add_subject' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="subject_name">Subject Name:</label>
+            <input type="text" class="form-control" id="subject_name" name="subject_name" required>
+        </div>
+        <div class="form-group">
+            <label for="subject_code">Subject Code:</label>
+            <input type="text" class="form-control" id="subject_code" name="subject_code" required>
+        </div>
+        <div class="form-group">
+            <label for="course">Course :</label>
+            <select id="course" name="course_id" required>
+            <option disabled selected>Select Course</option>
+            {% for i in courses %}
+                <option value="{{ i.id }}">{{ i.course_name }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="staff">Staff :</label>
+            <select id="staff" name="staff_id" required>
+            <option disabled selected>Select Staff</option>
+            {% for i in staff_members %}
+                <option value="{{ i.id }}">{{ i.admin.first_name }} {{ i.admin.last_name}}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Subject</button>
+    </form>
+</div>
+{% endblock %}

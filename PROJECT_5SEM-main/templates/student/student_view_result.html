@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+{% block content%}
+<div class="container" style="padding: 40px; font-family: Arial, sans-serif;">
+    <h2 style="color: #333; margin-bottom: 20px;">View Result</h2>
+    {% include 'includes/messages.html' %}
+    
+
+    <div class="table-responsive">
+        <table id="studentTable" class="table table-striped table-bordered" style="width: 100%; background: #fff;">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Subject Name</th>
+                    <th>Assignment Mark</th>
+                    <th>Assessment Mark</th>
+                    <th>UT Mark</th>
+                    <th>Status</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in result_obj %}
+                <tr>
+                    
+                    <td>{{ i.subject_id.subject_name }}</td>
+                    <td>{{ i.assignment_marks }}</td>
+                    <td>{{ i.assessment_marks }}</td>
+                    <td>{{ i.ut_marks}}</td>
+                   
+
+                    
+                    <td>
+                        {% if i.assessment_marks >= 45 and i.ut_marks >= 23 %}
+                            <span class="badge badge-success">Pass</span>
+                        {% else %}
+                            <span class="badge badge-danger">Fail</span>
+                        {% endif %}
+
+                    </td>
+                        
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,155 @@
+
+<div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+               <div id="sidebar-menu" class="sidebar-menu">
+                  {% if user.user_type == '1' %}
+                  <ul>
+                     <li class="menu-title">
+                        <span>Main Menu</span>
+                     </li>
+                     <li class="submenu active">
+                     <li> <a href="{% url 'home' %}"><i class="fas fa-user-graduate"></i> <span> Dashboard</span> </a></li>
+                     </li>
+                     <li class="submenu">
+                        <a href="#"><i class="fa-solid fa-user"></i> <span> Students</span> <span class="menu-arrow"></span></a>
+
+                        <ul>
+                           <li><a href="{% url 'view_student' %}">Student View </a></li>
+                           <li><a href="{% url 'add_student' %}">Student Add</a></li>
+                        </ul>
+                     </li>
+                     <li class="submenu">
+                        <a href="#"><i class="fas fa-chalkboard-teacher"></i> <span> Staff </span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{% url 'add_staff' %}">Teacher Add</a></li>
+                           <li><a href="{% url 'view_staff' %}">Teacher View</a></li>
+                        </ul>
+                     </li>
+                     <li class="submenu">
+                        <a href="#"><i class="fa-solid fa-book"></i> <span> Course</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{% url 'add_course' %}">Course Add</a></li>
+                           <li><a href="{% url 'view_course' %}">Course View</a></li>
+                        </ul>
+                     </li>
+                     <li class="submenu">
+                        <a href="#"><i class="fas fa-book-reader"></i> <span> Subjects</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{% url 'add_subject' %}">Subject Add</a></li>
+                           <li><a href="{% url 'view_subject' %}">Subject View</a></li>
+                        </ul>
+                     </li>
+                     <li class="submenu">
+                        <a href="#"><i class="fa-solid fa-clock"></i> <span> Sessions</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{% url 'add_session' %}">Session Add</a></li>
+                           <li><a href="{% url 'view_session' %}">Session View</a></li>
+                        </ul>
+                     </li>
+                     
+                     <li>
+                        <a href="{% url 'hod_view_attendance' %}"><i class="fa-solid fa-clipboard-user"></i> <span>View Attendance</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'hod_view_result' %}"><i class="fa-solid fa-clipboard-user"></i> <span>View Result</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'send_staff_notification' %}"><i class="fa-solid fa-bell"></i> <span>Send Staff Notification</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'send_student_notification' %}"><i class="fa-solid fa-bell"></i></i> <span>Send Student Notification</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'student_feedback_reply'%}"><i class="fa-solid fa-comment"></i> <span>Student Feedback</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'staff_feedback_reply' %}"><i class="fa-solid fa-comment"></i> <span>Staff Feedback</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'view_student_leave'%}"><i class="fa-solid fa-envelope"></i> <span>Student Leave</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'view_staff_leave' %}"><i class="fa-solid fa-envelope"></i> <span>Staff Leave</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'add_leave_type' %}"><i class="fa-solid fa-comment"></i> <span>Add Leave Type</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'add_timetable' %}"><i class="fa-solid fa-table"></i> <span>Add Time Table</span></a>
+                     </li>
+                     <li>
+                        <a href="{%url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i><span>Log out</span></a>
+                     </li>
+                     
+                        
+                  </ul>
+                  {% elif user.user_type == '2' %}
+                  <ul>
+                  <li>
+                        <a href="{% url 'staff_home'%}"><i class="fas fa-table"></i> <span>Home</span></a>
+                     </li>
+                  <li class="submenu">
+                        <a href="#"><i class="fa-solid fa-clipboard-user"></i> <span> Attendance</span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{% url 'take_attendance' %}">Attendance Add</a></li>
+                           <li><a href="{% url 'view_attendance' %}">Attendance View</a></li>
+                        </ul>
+                     </li>
+                  <li class="submenu">
+                        <a href="#"><i class="fa-solid fa-square-poll-vertical"></i> <span> Result </span> <span class="menu-arrow"></span></a>
+                        <ul>
+                           <li><a href="{% url 'add_result'%}">Result Add</a></li>
+                          
+                        </ul>
+                     </li>
+                     <li>
+                        <a href="{% url 'view_timetable' %}"><i class="fa-solid fa-table"></i> <span>View Time Table</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'staff_feedback' %}"><i class="fa-solid fa-comment"></i> <span>Send Feedback</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'staff_notification' %}"><i class="fas fa-bell"></i> <span>Notifications</span></a>
+                     </li>
+
+                     <li>
+                        <a href="{% url 'staff_apply_leave'%}"><i class="fas fa-table"></i> <span>Apply for Leave</span></a>
+                     </li>
+                     <li>
+                        <a href="{%url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> <span>Log out</span></a>
+                     </li>
+                  </ul> 
+                  {%else%}
+                  <ul>
+                     <li>
+                        <a href="{% url 'student_home'%}"><i class="fas fa-clipboard-list"></i> <span>Home</span></a>
+                     </li>
+                     
+                     <li>
+                        <a href="{% url 'student_view_attendance'%}"><i class="fas fa-table"></i> <span>View Attendance</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'student_view_result'%}"><i class="fa-solid fa-square-poll-vertical"></i> <span>View Result</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'student_view_timetable' %}"><i class="fa-solid fa-table"></i> <span>View Time Table</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'student_leave'%}"><i class="fas fa-table"></i> <span>Apply for Leave </span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'student_notification'%}"><i class="fas fa-bell"></i> <span>View Notification </span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'student_feedback'%}"><i class="fa-solid fa-comment"></i> <span>Send Feedback</span></a>
+                     </li>
+                     <li>
+                        <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> <span>Log out</span></a>
+                     </li>
+                  </ul> 
+
+                  {%endif%}
+               </div>
+            </div>
+         </div>
+    

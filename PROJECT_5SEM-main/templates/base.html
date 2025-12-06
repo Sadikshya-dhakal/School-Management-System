@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <title>School Management System</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">      
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/fontawesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <!-- Add this in the <head> section -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+    <div class="main-wrapper">
+        {% include 'includes/header.html' %}
+        {% include 'includes/sidebar.html' %}
+
+        <div class="page-wrapper">
+            <div class="content container-fluid">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+            
+        </div>
+        {% include 'includes/footer.html' %}
+    </div>
+
+    <!-- JS Files -->
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/apexchart/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/apexchart/chart-data.js' %}"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+</html>

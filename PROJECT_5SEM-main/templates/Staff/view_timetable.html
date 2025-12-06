@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header text-white" style="background-color: orange;">
+            <h4 class="mb-0"><i class="fas fa-calendar-plus me-2"></i> My Time Table</h4>
+        </div>
+        <div class="card-body">
+            {% if timetable %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th><i class="fas fa-calendar-day me-1"></i>Day</th>
+                            <th><i class="fas fa-graduation-cap me-1"></i>Course</th>
+                            <th><i class="fas fa-book me-1"></i>Subject</th>
+                            <th><i class="fas fa-clock me-1"></i>Start Time</th>
+                            <th><i class="fas fa-hourglass-end me-1"></i>End Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in timetable %}
+                        <tr>
+                            <td><span class="badge bg-primary">{{ row.day }}</span></td>
+                            <td>{{ row.course.course_name }}</td>
+                            <td>{{ row.subject.subject_name }}</td>
+                            <td><span class="text-success fw-bold">{{ row.start_time|time:"g:i A" }}</span></td>
+                            <td><span class="text-danger fw-bold">{{ row.end_time|time:"g:i A" }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                <div class="alert alert-warning text-center">
+                    <i class="fas fa-info-circle me-2"></i>No timetable assigned yet. Please contact the administrator.
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

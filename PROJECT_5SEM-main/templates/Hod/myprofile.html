@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{%  block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        color: #222;
+        text-align: center;
+      }
+      
+      .container {
+        padding: 30px 20px;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.2rem;
+      }
+      
+      .subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+      }
+      
+      .profile-image img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      
+      .about {
+        background-color: #4a5cbd;
+        color: white;
+        padding: 20px;
+        margin-top: 30px;
+        border-radius: 8px;
+      }
+      
+      .about h2 {
+        margin-top: 0;
+        font-size: 1.5rem;
+      }
+      
+      .about a {
+        color: #ddd;
+        text-decoration: underline;
+      }
+      
+      .details {
+        margin-top: 30px;
+      }
+      
+      .details h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+      
+      .details p {
+        margin: 6px 0;
+      }
+      
+      .social-icons {
+        margin-top: 20px;
+      }
+      
+      .social-icons a {
+        margin: 0 10px;
+        font-size: 1.5rem;
+        color: #222;
+        text-decoration: none;
+      }
+      
+      .social-icons a:hover {
+        color: #4a5cbd;
+      }
+      
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Profile</h1>
+    <p class="subtitle">
+      {% if user.user_type == '1' %}
+        <strong>HOD</strong>
+      {% elif user.user_type == '2' %}
+        <strong>Teacher</strong>
+      {% elif user.user_type == '3' %}
+        <strong>Student</strong>
+      {% else %}
+        <strong>Unknown</strong>
+      {% endif %}
+    </p>
+
+    <div class="profile-image">
+      <img src="{{ user.profile_pic.url }}" alt="Hunter Norton">
+    </div>
+
+    <div class="about">
+      <h2>About me</h2>
+      <p style="text-align: justify;">
+        It was a grand vision & mission of our beloved founder member and Principal Late Prof. Dr. Deepak Bhattarai and other six prominent founders, 
+        to provide opportunities of technical education in Nepal to the students of our country. Since its establishment in 1994 the institute has taken 
+        giant strides and reached today’s position. It is a matter of great pride that our Institute has been bestowed with a permanent affiliation status
+         by the Nepal Engineering Council for all the eligible Engineering courses being run in nec. This became possible due to the sustained support and 
+         encouragement provided by our founders, also the hard work done by the teachers’ staff and the blessings from all our stakeholders, parents/guardians
+         and alumni. Known for quality education, discipline, eco-friendly campus, concern for society and environment, nec has carved a niche for itself in 
+         the field of technical education in Nepal. With a proud legacy of 29 years, the institute has excelled in every field. The students who graduated
+         from this institute are occupying prestigious positions in the organizations of national and international repute. Our aim is to transform the students
+         into rational thinkers, problem solver, competent technocrats and managers, law abiding citizens and spiritually enlightened individuals and also to 
+         inculcate social and moral values, sportsmanship, compassion for nature, pride for our culture and traditions. This is our firm belief that the rich
+         values and traditions imbibed here would carry our students to greater heights. We believe that in this era of knowledge society, our students must 
+         be equipped with an appropriate knowledge, habits, attitudes and morals leading to holistic development. The students must participate in the co-curricular
+         and extracurricular activities to facilitate the process of creative and critical thinking. I earnestly believe that our institute provides ample 
+         opportunities for developing and shaping the personalities of the students.
+         
+      </p>
+      
+    </div>
+
+    <div class="details">
+      <h2>Details</h2>
+      <p><strong>Name:</strong> {{user.first_name}} {{user.last_name}}</p>
+      <p><strong>User Name:</strong> {{user.username}}</p>
+      <p><strong>Email:</strong> {{user.email}} </p>
+      <p><strong>Age:</strong> 33 years</p>
+      <p><strong>Location:</strong> Kathmandu, Nepal</p>
+    </div>
+
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+
+</body>
+</html>
+{% endblock %}
